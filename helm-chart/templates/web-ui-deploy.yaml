@@ -76,6 +76,7 @@ spec:
       labels:
         epc-mode: webui
     spec:    
+      serviceAccountName: 5gcore
       containers:
       - name: webui
         imagePullPolicy: {{ .Values.webui.image.pullPolicy }}

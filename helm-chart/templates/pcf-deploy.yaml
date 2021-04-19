@@ -25,11 +25,12 @@ spec:
       epc-mode: pcf
   template:
     metadata:
-       annotations:
+      annotations:
         sidecar.istio.io/inject: "true"
       labels:
         epc-mode: pcf
     spec:    
+      serviceAccountName: 5gcore
       containers:
         - name: pcf
           image: "{{ .Values.open5gs.image.repository }}:{{ .Values.open5gs.image.tag }}"

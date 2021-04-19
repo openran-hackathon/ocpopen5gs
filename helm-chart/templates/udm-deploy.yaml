@@ -30,6 +30,7 @@ spec:
       labels:
         epc-mode: udm
     spec:   
+      serviceAccountName: 5gcore
       containers:
         - name: udm
           image: "{{ .Values.open5gs.image.repository }}:{{ .Values.open5gs.image.tag }}"
