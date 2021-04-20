@@ -21,9 +21,31 @@ spec:
       labels:
         app: open5gs-mongodb
     spec:
+      serviceAccountName: 5gcore
       containers:
-      - image: free5gmano/nextepc-mongodb
+      - image: registry.redhat.io/rhscl/mongodb-36-rhel7
         name: open5gs-mongodb
+        env:
+        - name: MONGODB_ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: database-secret-config
+              key: admin-password
+        - name: MONGODB_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: database-secret-config
+              key: dbname
+        - name: MONGODB_USER
+          valueFrom:
+            secretKeyRef:
+              name: database-secret-config
+              key: username
+        - name: MONGODB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: database-secret-config
+              key: password
         ports:
         - containerPort: 27017
           name: mongodb
