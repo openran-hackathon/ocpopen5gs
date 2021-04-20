@@ -11,8 +11,11 @@ data:
 
     ausf:
       sbi:
-      - addr: 0.0.0.0
+      - addr:
+         - 0.0.0.0
+        port: 8099
         advertise: open5gs-ausf
     nrf:
      sbi:
       name: open5gs-nrf
+      port: 80

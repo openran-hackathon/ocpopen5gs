@@ -25,8 +25,8 @@ spec:
     epc-mode: amf
   ports:
     - protocol: TCP
-      port: 80   
-      targetPort: 80      
+      port: 8099
+      targetPort: http2
 ---  
 apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
 kind: Deployment
@@ -56,6 +56,10 @@ spec:
           - name: open5gs-amf-config
             mountPath: /open5gs/config-map/amf.yaml
             subPath: "amf.yaml"
+          ports:
+          - containerPort: 8099
+            name: http2
+
       volumes:
         - name: open5gs-amf-config
           configMap:

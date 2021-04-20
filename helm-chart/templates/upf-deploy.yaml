@@ -10,7 +10,7 @@ spec:
   ports:
     - protocol: UDP
       port: 8805
-      targetPort: 8805    
+      targetPort: upf-8805
 ---  
 apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
 kind: Deployment
@@ -30,8 +30,11 @@ spec:
       labels:
         epc-mode: upf
     spec:   
+      serviceAccountName: 5gcore
       containers:
         - name: upf
+          securityContext:
+            privileged: true
           image: "{{ .Values.open5gs.image.repository }}:{{ .Values.open5gs.image.tag }}"
           imagePullPolicy: {{ .Values.open5gs.image.pullPolicy }}
           command: ["/bin/sh", "-c"]
@@ -43,6 +46,10 @@ spec:
             sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward";
             iptables -t nat -A POSTROUTING -s 10.45.0.0/16 ! -o ogstun -j MASQUERADE;
             open5gs-upfd -c /open5gs/config-map/upf.yaml;
+          ports:
+          - containerPort: 8805
+            protocol: UDP
+            name: upf-8805
           volumeMounts:
           - name: open5gs-upf-config
             mountPath: /open5gs/config-map/upf.yaml

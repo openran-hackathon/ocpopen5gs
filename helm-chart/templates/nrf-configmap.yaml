@@ -10,5 +10,32 @@ data:
         file: /var/log/open5gs/nrf.log
 
     nrf:
-        sbi:
-          addr: 0.0.0.0
+      sbi:
+      - addr:
+         - 0.0.0.0
+        port: 8099
+
+    amf:
+      sbi:
+      - name: open5gs-amf
+        port: 80
+
+    ausf:
+      sbi:
+        name: open5gs-ausf
+        port: 80
+
+    smf:
+      sbi:
+        name: open5gs-smf
+        port: 80
+
+    pcf:
+      sbi:
+        name: open5gs-pcf
+        port: 80
+
+    udm:
+      sbi:
+        name: open5gs-udm
+        port: 80
