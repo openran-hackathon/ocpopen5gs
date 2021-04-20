@@ -9,12 +9,15 @@ data:
     logger:
         file: /var/log/open5gs/pcf.log
     
-    db_uri: mongodb://mongodb-svc/open5gs    
+    db_uri: mongodb://${MONGODB_ADMIN_USER}:${MONGODB_ADMIN_PASSWORD}@mongodb-svc/admin
 
     pcf:
       sbi:     
-      - addr: 0.0.0.0
+      - addr:
+         - 0.0.0.0
+        port: 8099
         advertise: open5gs-pcf
     nrf:
      sbi:
       name: open5gs-nrf 
+      port: 80
