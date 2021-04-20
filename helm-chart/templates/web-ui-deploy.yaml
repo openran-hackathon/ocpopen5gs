@@ -83,8 +83,8 @@ spec:
         image: "{{ .Values.webui.image.repository }}:{{ .Values.webui.image.tag }}"      
         env:
         - name: DB_URI
-          value: mongodb://mongodb-svc/open5gs
+          value: mongodb://admin:{{ .Values.mongodb.adminPassword }}@mongodb-svc/admin
         - name: NODE_ENV
           value: "production"  
         - name: HOSTNAME
-          value: '0.0.0.0'               
+          value: '0.0.0.0'
