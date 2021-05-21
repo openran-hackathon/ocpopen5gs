@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: open5gs-mongoc
+spec:
+  selector:
+    matchLabels:
+      app: open5gs-mongoc
+  template:
+    metadata:
+      labels:
+        app: open5gs-mongoc
+    spec:
+      serviceAccountName: 5gcore
+      containers:
+      - image: registry.redhat.io/rhscl/mongodb-36-rhel7
+        name: open5gs-mongoc
+        args:
+        - sh
+        - -c
+        - sleep infinity
+        env:
+        - name: MONGODB_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: database-secret-config
+              key: dbname
+        - name: MONGODB_USER
+          valueFrom:
+            secretKeyRef:
+              name: database-secret-config
+              key: username
+        - name: MONGODB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: database-secret-config
+              key: password

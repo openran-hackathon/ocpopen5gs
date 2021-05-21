@@ -18,24 +18,24 @@ data:
     amf:
       sbi:
       - name: open5gs-amf
-        port: 80
+        port: 8099
 
     ausf:
       sbi:
         name: open5gs-ausf
-        port: 80
+        port: 8099
 
     smf:
       sbi:
         name: open5gs-smf
-        port: 80
+        port: 8099
 
     pcf:
       sbi:
         name: open5gs-pcf
-        port: 80
+        port: 8099
 
     udm:
       sbi:
         name: open5gs-udm
-        port: 80
+        port: 8099

@@ -35,6 +35,9 @@ spec:
         - name: upf
           securityContext:
             privileged: true
+            capabilities:
+              add:
+              - NET_ADMIN
           image: "{{ .Values.open5gs.image.repository }}:{{ .Values.open5gs.image.tag }}"
           imagePullPolicy: {{ .Values.open5gs.image.pullPolicy }}
           command: ["/bin/sh", "-c"]
@@ -54,8 +57,8 @@ spec:
           - name: open5gs-upf-config
             mountPath: /open5gs/config-map/upf.yaml
             subPath: "upf.yaml"
-          - mountPath: /dev/net/tun
-            name: dev-net-tun            
+          - name: dev-net-tun
+            mountPath: /dev/net/tun
       volumes:
         - name: open5gs-upf-config
           configMap:
@@ -63,3 +66,4 @@ spec:
         - name: dev-net-tun
           hostPath:
             path: /dev/net/tun
+            type: CharDevice

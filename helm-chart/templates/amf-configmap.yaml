@@ -48,4 +48,4 @@ data:
     nrf:
      sbi:
        name: open5gs-nrf         
-       port: 80
+       port: 8099
