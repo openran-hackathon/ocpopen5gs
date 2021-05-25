@@ -7,7 +7,7 @@ metadata:
 data:
   nssf.yaml: |
     logger:
-        file: /var/log/open5gs/nssf.log   
+      level: {{ .Values.open5gs.logger.level }}
 
     nssf:
       sbi:     

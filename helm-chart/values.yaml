@@ -7,6 +7,8 @@ open5gs:
     repository: registry.gitlab.com/infinitydon/registry/open5gs-aio
     pullPolicy: IfNotPresent
     tag: "v2.2.2"
+  logger:
+    level: error
 
 webui:
   image:
