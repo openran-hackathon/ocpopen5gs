@@ -4,9 +4,9 @@
 
 open5gs:
   image:
-    repository: registry.gitlab.com/infinitydon/registry/open5gs-aio
-    pullPolicy: IfNotPresent
-    tag: "v2.2.2"
+    repository: quay.io/xymox/open5gs-ubi8
+    pullPolicy: Always
+    tag: "latest"
   logger:
     level: error
 
