@@ -34,15 +34,19 @@ spec:
       containers:
         - name: upf
           securityContext:
-            privileged: true
+            privileged: false
             capabilities:
               add:
               - NET_ADMIN
+              - NET_RAW
+              - MKNOD
           image: "{{ .Values.open5gs.image.repository }}:{{ .Values.open5gs.image.tag }}"
           imagePullPolicy: {{ .Values.open5gs.image.pullPolicy }}
           command: ["/bin/sh", "-c"]
           args:
-          - ip tuntap add name ogstun mode tun;
+          - mkdir -p /dev/net;
+            mknod /dev/net/tun c 10 200;
+            ip tuntap add name ogstun mode tun;
             ip addr add 10.45.0.1/16 dev ogstun;
             sysctl -w net.ipv6.conf.all.disable_ipv6=1;
             ip link set ogstun up;
@@ -57,13 +61,7 @@ spec:
           - name: open5gs-upf-config
             mountPath: /open5gs/config-map/upf.yaml
             subPath: "upf.yaml"
-          - name: dev-net-tun
-            mountPath: /dev/net/tun
       volumes:
         - name: open5gs-upf-config
           configMap:
             name: open5gs-upf-config
-        - name: dev-net-tun
-          hostPath:
-            path: /dev/net/tun
-            type: CharDevice

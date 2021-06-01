@@ -6,8 +6,6 @@ metadata:
     epc-mode: nrf
 spec:
   clusterIP: None
-  clusterIPs:
-  - None
   selector:
     epc-mode: nrf
   ports:

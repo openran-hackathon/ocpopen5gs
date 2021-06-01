@@ -12,7 +12,7 @@ spec:
     - protocol: SCTP
       port: 38412
       targetPort: 38412
-      nodePort: 30412
+      nodePort: {{ .Values.amf.nodePort }}
 ---
 apiVersion: v1
 kind: Service
