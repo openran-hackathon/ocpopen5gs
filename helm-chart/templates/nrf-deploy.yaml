@@ -6,6 +6,7 @@ metadata:
     epc-mode: nrf
 spec:
   clusterIP: None
+  publishNotReadyAddresses: true
   selector:
     epc-mode: nrf
   ports:

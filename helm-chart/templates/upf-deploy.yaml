@@ -46,12 +46,12 @@ spec:
           args:
           - mkdir -p /dev/net;
             mknod /dev/net/tun c 10 200;
-            ip tuntap add name ogstun mode tun;
-            ip addr add 10.45.0.1/16 dev ogstun;
+            ip tuntap add name {{ .Values.open5gs.tundev }} mode tun;
+            ip addr add {{ .Values.open5gs.network }} dev {{ .Values.open5gs.tundev }};
             sysctl -w net.ipv6.conf.all.disable_ipv6=1;
-            ip link set ogstun up;
+            ip link set {{ .Values.open5gs.tundev }} up;
             sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward";
-            iptables -t nat -A POSTROUTING -s 10.45.0.0/16 ! -o ogstun -j MASQUERADE;
+            iptables -t nat -A POSTROUTING -s {{ .Values.open5gs.network }} ! -o {{ .Values.open5gs.tundev }} -j MASQUERADE;
             open5gs-upfd -c /open5gs/config-map/upf.yaml;
           ports:
           - containerPort: 8805

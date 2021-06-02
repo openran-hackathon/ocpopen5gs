@@ -51,7 +51,10 @@ spec:
         - name: amf
           image: "{{ .Values.open5gs.image.repository }}:{{ .Values.open5gs.image.tag }}"
           imagePullPolicy: {{ .Values.open5gs.image.pullPolicy }}
-          command: ["open5gs-amfd", "-c", "/open5gs/config-map/amf.yaml"]
+          command:
+          - /bin/sh
+          - -c
+          - cat /open5gs/config-map/amf.yaml | sed -e "s/0\.0\.0\.0/${POD_IP}/" > /tmp/amf.yaml ; open5gs-amfd -c /tmp/amf.yaml
           volumeMounts:
           - name: open5gs-amf-config
             mountPath: /open5gs/config-map/amf.yaml
@@ -59,7 +62,11 @@ spec:
           ports:
           - containerPort: 8099
             name: http2
-
+          env:
+          - name: POD_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.podIP
       volumes:
         - name: open5gs-amf-config
           configMap:

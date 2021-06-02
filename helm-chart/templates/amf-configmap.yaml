@@ -50,5 +50,5 @@ data:
        port: 8099
     nssf:
      sbi:
-       name: open5gs-nnssf         
+       name: open5gs-nssf         
        port: 8099

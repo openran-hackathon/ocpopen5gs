@@ -25,7 +25,7 @@ data:
         gtpu:
           dev: {{ .Values.k8s.interface }}    
         subnet:
-         - addr: 10.45.0.1/16
+         - addr: {{ .Values.open5gs.network }}
            dnn: {{ .Values.dnn }}
         dns:
           - 8.8.8.8
