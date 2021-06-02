@@ -9,7 +9,7 @@ open5gs:
     tag: "latest"
   logger:
     level: error
-  network: 10.55.0.1/16
+  network: 10.45.0.1/16
   tundev: ogstun
 
 webui:

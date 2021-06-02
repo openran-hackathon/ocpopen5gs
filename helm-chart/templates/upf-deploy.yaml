@@ -34,7 +34,7 @@ spec:
       containers:
         - name: upf
           securityContext:
-            privileged: false
+            privileged: true
             capabilities:
               add:
               - NET_ADMIN
@@ -44,9 +44,7 @@ spec:
           imagePullPolicy: {{ .Values.open5gs.image.pullPolicy }}
           command: ["/bin/sh", "-c"]
           args:
-          - mkdir -p /dev/net;
-            mknod /dev/net/tun c 10 200;
-            ip tuntap add name {{ .Values.open5gs.tundev }} mode tun;
+          - ip tuntap add name {{ .Values.open5gs.tundev }} mode tun;
             ip addr add {{ .Values.open5gs.network }} dev {{ .Values.open5gs.tundev }};
             sysctl -w net.ipv6.conf.all.disable_ipv6=1;
             ip link set {{ .Values.open5gs.tundev }} up;
@@ -61,7 +59,13 @@ spec:
           - name: open5gs-upf-config
             mountPath: /open5gs/config-map/upf.yaml
             subPath: "upf.yaml"
+          - name: dev-net-tun
+            mountPath: /dev/net/tun
       volumes:
         - name: open5gs-upf-config
           configMap:
             name: open5gs-upf-config
+        - name: dev-net-tun
+          hostPath:
+            path: /dev/net/tun
+            type: CharDevice
