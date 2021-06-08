@@ -12,10 +12,9 @@ data:
     db_uri: mongodb://${MONGODB_ADMIN_USER}:${MONGODB_ADMIN_PASSWORD}@mongodb-svc/admin
     udr:
       sbi:
-      - addr:
-         - 0.0.0.0
-        port: 8099
-        advertise: open5gs-udr
+       - dev: eth0
+         port: 8099
+         advertise: open5gs-udr
     nrf:
      sbi:
       name: open5gs-nrf  

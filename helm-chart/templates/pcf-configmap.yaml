@@ -13,8 +13,7 @@ data:
 
     pcf:
       sbi:     
-      - addr:
-         - 0.0.0.0
+      - dev: eth0
         port: 8099
         advertise: open5gs-pcf
     nrf:
