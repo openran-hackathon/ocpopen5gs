@@ -8,9 +8,16 @@ open5gs:
     pullPolicy: Always
     tag: "latest"
   logger:
-    level: error
+    level: info
   network: 10.45.0.1/16
   tundev: ogstun
+
+#
+# Change this for security reasons
+#
+mongodb:
+  adminPassword: mongo
+  password: mongo
 
 webui:
   image:
