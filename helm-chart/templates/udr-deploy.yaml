@@ -36,7 +36,7 @@ spec:
         - sh
         - -c
         - cat /initconfig/udr.yaml | envsubst > /config/udr.yaml
-        image: bhgedigital/envsubst
+        image: quay.io/xymox/envsubst:ubi
         name: envsubst
         env:
         - name: NODE_NAME

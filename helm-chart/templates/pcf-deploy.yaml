@@ -36,7 +36,7 @@ spec:
         - sh
         - -c
         - cat /initconfig/pcf.yaml | envsubst > /config/pcf.yaml
-        image: bhgedigital/envsubst
+        image: quay.io/xymox/envsubst:ubi
         name: envsubst
         env:
         - name: NODE_NAME
