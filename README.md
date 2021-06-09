@@ -30,7 +30,7 @@ oc adm policy add-scc-to-user privileged -z 5gcore
 Then create a values-overrides.yaml file to customize your helm deployment and install the chart in you namespace.
 
 ```bash
-cd helm
+cd helm-chart
 cat <<EOF > values-overrides.yaml
 mongodb:
   adminPassword: bikinibottom
