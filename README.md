@@ -12,7 +12,7 @@ To deploy this project in namespace <5GCORENS>
 
 ```bash
 git clone https://github.com/clustership/ocpopen5gs.git
-ce ocpopen5gs/helm-chart
+cd ocpopen5gs/helm-chart
 
 export NS=<5GCORENS>
 
