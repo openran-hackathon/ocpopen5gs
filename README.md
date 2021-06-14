@@ -8,24 +8,15 @@ Red Hat UBI (Universal Based Image) are used to build the open5gs containers.
 
 ## Project deployment
 
-To deploy this project in namespace <5GCORENS>
+To deploy this project in your existing namespace <5GCORENS>
 
 ```bash
 git clone https://github.com/clustership/ocpopen5gs.git
 cd ocpopen5gs/helm-chart
 
 export NS=<5GCORENS>
-
-oc new-project ${NS}
 ```
 
-Unfortunately the upf container required privileged SCC (Security Context Constraint) to configure the tun device used for communication with user equipment (UE).
-While waiting for the development of a Kubernetes device plugin to manage tun device allocation to containers to reduce this privleged requierments, you must ask you cluster administrator to issue the following command in your new project.
-
-
-```bash
-oc adm policy add-scc-to-user privileged -z 5gcore
-```
 
 Then create a values-overrides.yaml file to customize your helm deployment and install the chart in you namespace.
 
@@ -33,12 +24,12 @@ Then create a values-overrides.yaml file to customize your helm deployment and i
 cd helm-chart
 cat <<EOF > values-overrides.yaml
 mongodb:
-  adminPassword: bikinibottom
-  password: patrickstar
+  adminPassword: bikinibottom # (change this)
+  password: patrickstar # (change this too)
 
 open5gs:
   logger:
-    level: info
+    level: info # use debug to troubleshoot
 
 #
 # Change nodePort to a free available
